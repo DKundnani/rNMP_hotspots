@@ -1,0 +1,44 @@
+
+conda activate r_env
+inputloc=$(pwd)/mito #Location of bed files
+resultsloc=$inputloc/hotspots
+scripts=rNMP_hotpots/ #location of this repository
+fai=~/p-fstorici3-0/rich_project_bio-storici/reference/hg38/filtered_hg38-mito.fa.fai #full path of reference genome .fai file
+thresh=0.01 #Fraction of locaitons with highest rNMP counts to be filtered 
+
+############################### Getting counts and Enrichment Factor of each bed file #####################################
+mkdir $resultsloc $resultsloc/out $resultsloc/out/ppthresh $resultsloc/out/percent
+for file in $(ls $inputloc/FS3*.bed)
+do
+Rscript $scripts/hotspots_thresh.R -b $file -g $fai -r BSgenome.Hsapiens.UCSC.hg38 -t $thresh -o $resultsloc &
+done
+wait
+
+#Evaluating counts of each file with top 1 % (thresh=0.01)
+for file in $(ls *percentthresh_0.01*); do awk '{sum+=$8} END {print sum}' $file; done
+for file in $(ls *percentthresh_0.01*); do echo $file; done
+
+############################### Getting matrix of common hotspots #####################################
+#Sample file in the repository, create separate file for each subtype
+cd $resultsloc
+
+for file in $(ls *files); do
+Rscript $scripts/df_matrix.R -f $file -a -t $thresh -c 10 -s -o ${file}_${thresh}_common_EF.tsv
+Rscript $scripts/df_matrix.R -f $file -a -t $thresh -c 8 -s -o ${file}_${thresh}_common_counts.tsv
+done
+
+
+#Properties of common hotspots
+wc -l *_common_counts.tsv
+for file in $(ls *_common_counts.tsv); do
+echo $file
+cut -f4 $file | sort | uniq -c
+done
+
+wc -l *${thresh}_common_counts.tsv
+for file in $(ls *${thresh}_common_counts.tsv); do
+echo $file
+cut -f4 $file | sort | uniq -c
+done
+
+
