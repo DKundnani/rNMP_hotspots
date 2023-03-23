@@ -27,7 +27,7 @@ thresh=0.01 #Fraction of locaitons with highest rNMP counts to be filtered
 # One script run for getting rNMP counts, enrichment Factor, filter hotspots from each bed file and generate ggseqlogo plots for hotspots (filtered based on threshold provided)
 
 mkdir $resultsloc $resultsloc/out $resultsloc/out/ppthresh $resultsloc/out/percent
-for file in $(ls $inputloc/FS3*.bed)
+for file in $(ls $inputloc/FS*.bed)
 do
 Rscript $scripts/hotspots_thresh.R -b $file -g $fai -r BSgenome.Hsapiens.UCSC.hg38 -t $thresh -o $resultsloc &
 done
