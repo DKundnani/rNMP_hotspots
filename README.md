@@ -10,7 +10,7 @@ Use [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/in
 conda env create -n r_env --file r_env.yml
 ```
 
-## Usage
+## Usage (Example below is shown for human mitochondria)
 
 ```bash
 # Activate Enviroment
