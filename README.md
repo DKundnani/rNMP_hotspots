@@ -4,7 +4,7 @@ Finding common and highly incorporated rNMP locations using rNMP Enrichment Fact
 
 ## Installation
 
-Use [conda](https://pip.pypa.io/en/stable/](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) to create enviroment from r_env.yml file.
+Use [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) to create enviroment from r_env.yml file.
 
 ```bash
 conda env create -n r_env --file r_env.yml
@@ -17,7 +17,7 @@ conda env create -n r_env --file r_env.yml
 conda activate r_env
 
 # Define Variables
-inputloc=$(pwd)/mito #Location of bed files
+inputloc=$(pwd)/mito #Location of bed files 
 resultsloc=$inputloc/hotspots
 scripts=rNMP_hotpots/scripts #location of this repository
 fai=~/p-fstorici3-0/rich_project_bio-storici/reference/hg38/filtered_hg38-mito.fa.fai #full path of reference genome .fai file
@@ -35,7 +35,7 @@ wait
 
 
 # Get counts and Enrichment Factor matrices based on cell type 
-mat=$scripts/matrix
+mat=$scripts/matrix #IF bed file name is ${lib}.bed the matrix contains '${lib_poissprob}.bed\t${lib}\tCelltype'
 Rscript $scripts/df_matrix.R -f $mat -a -t $thresh -c 10 -s -o ${file}_${thresh}_common_EF.tsv
 Rscript $scripts/df_matrix.R -f $mat -a -t $thresh -c 8 -s -o ${file}_${thresh}_common_counts.tsv
 
