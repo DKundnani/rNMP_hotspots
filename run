@@ -1,9 +1,9 @@
 
 conda activate r_env
-inputloc=$(pwd)/mito #Location of bed files
+inputloc=$(pwd)/new #Location of bed files
 resultsloc=$inputloc/hotspots
-scripts=rNMP_hotpots/ #location of this repository
-fai=~/p-fstorici3-0/rich_project_bio-storici/reference/hg38/filtered_hg38-mito.fa.fai #full path of reference genome .fai file
+scripts='/storage/home/hcoda1/5/dkundnani3/p-fstorici3-0/rich_project_bio-storici/bin/TAVIR' #location of this repository
+fai=~/p-fstorici3-0/rich_project_bio-storici/reference/hg38/filtered_hg38-nucleus.fa.fai #full path of reference genome .fai file
 thresh=0.01 #Fraction of locaitons with highest rNMP counts to be filtered 
 
 ############################### Getting counts and Enrichment Factor of each bed file #####################################
