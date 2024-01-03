@@ -20,7 +20,7 @@ get_flank_seq<-function(bedfn,l,r,genome){
   ribo=gsub("T","U", ribo[,1])
   seq=as.data.frame(BSgenome::getSeq(bsgenome, flank_regions))
   colnames(seq)='seq'
-  seqU=paste(substr(seq[,1],1,l), ribo,substr(seq[,1],l+2,l+r+1), sep="")
+  seqU=paste(substr(seq[,1],1,l),"r", ribo,substr(seq[,1],l+2,l+r+1), sep="")
   #ribo.rna=RNAStringSet()
   #seq.rna=list()
   #for (i in seq(1,length(seq))) {
