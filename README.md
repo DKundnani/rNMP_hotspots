@@ -52,6 +52,7 @@ git clone https://github.com/DKundnani/rNMP_hotspots.git
 conda env create --name rNMPhotspots_env --file /rNMP_hotspots/yml/r_env.yml
 ```
 ### Additional Dependencies
+* Input files (bed) containing single nucleotide locations, mainly for rNMP data. (another single nucleotide data can also be experimented on!)
 * Reference genome files (.fa and .fai) of the organism being used(Also used to generate bed files)
 * BAM files (optional) from DNA-seq pipelines See [https://github.com/DKundnani/Omics-pipelines](https://github.com/DKundnani/Omics-pipelines)
 
