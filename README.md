@@ -57,7 +57,7 @@ conda env create --name rNMPhotspots_env --file /rNMP_hotspots/yml/r_env.yml
 
 <!-- USAGE -->
 ## Usage
-###Defining-variables
+### Defining variables
 ```bash
 lib=path/to/AGS/ribo-DNA-order #First col Library name, 3rd col basename of bam files from DNA-se pipeline, 
 bed=path/to/AGS/bed
@@ -105,7 +105,7 @@ for thresh in 0.05 0.02 0.01 ; do
 for file in $(ls BY*${thresh}*top*); do Rscript $script/meme.R -f $file -c 9 & done #ggseqlogo plots
 done
 ```
-### Stacked barplots for composition
+### Additional visualizations
 See stacked barplots for composition in [RPA-wrapper](https://github.com/DKundnani/RPA-wrapper)
 
 
