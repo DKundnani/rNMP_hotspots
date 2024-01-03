@@ -29,9 +29,11 @@ To obtain rNMP hotspots(locations of highly abundant rNMPs) using a percentage o
     <li><a href="##Usage">Usage</a></li>
       <ul>
         <li><a href="###Defining-variables">Defining variables</a></li>
-        <li><a href="###Normalization of bed files for coverage">Normalization of bed files for coverage</a></li>
-        <li><a href="###Getting-hotspots-using-threshold">Getting counts using bed file</a></li>
-       <li><a href="###Visualization">Visualization</a></li>
+        <li><a href="###Normalization-of-bed-files-for-coverage-(optional)">Normalization of bed files for coverage (optional)</a></li>
+        <li><a href="###Generating-matrix">Generating matrix</a></li>
+       <li><a href="###Getting-common-hotspots-for-each-genotype-using-different-thresholds-and-visualization">Getting common hotspots for each genotype using different thresholds and visualization</a></li>
+        <li><a href="###GGseqlogo-plots-(MEME plots)">GGseqlogo plots (MEME plots)</a></li>
+        <li><a href="###Additional-visualizations">Additional visualizations</a></li>
       </ul>
     <li><a href="##Contributing">Contributing</a></li>
     <li><a href="##License">License</a></li>
@@ -67,7 +69,7 @@ normbed=path/to/AGS/norm_counts
 script=path/to/AGS/rNMP_hotspots
 genome=path/to/reference/sacCer2/sacCer2-nucl.fa.fai #size file of the genome
 ```
-### Normalization of bed files for coverage
+### Normalization of bed files for coverage (optional)
 ```bash
 conda activate rNMPhotspots_env #activating enviroment
 mkdir $normbed #Creating output directory
