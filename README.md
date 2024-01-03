@@ -124,16 +124,16 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/DKundnani/Ribose-Map-QC?style=for-the-badge
-[contributors-url]: https://github.com/DKundnani/Ribose-Map-QC/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/DKundnani/Ribose-Map-QC?style=for-the-badge
-[forks-url]: https://github.com/DKundnani/Ribose-Map-QC/forks
-[stars-shield]: https://img.shields.io/github/stars/DKundnani/Ribose-Map-QC?style=for-the-badge
-[stars-url]: https://github.com/DKundnani/Ribose-Map-QC/stargazers
-[issues-shield]: https://img.shields.io/github/issues/DKundnani/Ribose-Map-QC?style=for-the-badge
-[issues-url]: https://github.com/DKundnani/Ribose-Map-QC/issues
-[license-shield]: https://img.shields.io/github/license/DKundnani/Ribose-Map-QC?style=for-the-badge
-[license-url]: https://github.com/DKundnani/Ribose-Map-QC/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/DKundnani/rNMP_hotspots?style=for-the-badge
+[contributors-url]: https://github.com/DKundnani/rNMP_hotspots/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/DKundnani/rNMP_hotspots?style=for-the-badge
+[forks-url]: https://github.com/DKundnani/rNMP_hotspots/forks
+[stars-shield]: https://img.shields.io/github/stars/DKundnani/rNMP_hotspots?style=for-the-badge
+[stars-url]: https://github.com/DKundnani/rNMP_hotspots/stargazers
+[issues-shield]: https://img.shields.io/github/issues/DKundnani/rNMP_hotspots?style=for-the-badge
+[issues-url]: https://github.com/DKundnani/rNMP_hotspots/issues
+[license-shield]: https://img.shields.io/github/license/DKundnani/rNMP_hotspots?style=for-the-badge
+[license-url]: https://github.com/DKundnani/rNMP_hotspots/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/deepalik
 [product-screenshot]: images/screenshot.png
