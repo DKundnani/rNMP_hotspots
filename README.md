@@ -137,7 +137,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/deepalik
 [product-screenshot]: images/screenshot.png
-[commits-url]: https://github.com/DKundnani/Ribose-Map-QC/pulse
-[commits-shield]: https://img.shields.io/github/commit-activity/t/DKundnani/Ribose-Map-QC?style=for-the-badge
+[commits-url]: https://github.com/DKundnani/rNMP_hotspots/pulse
+[commits-shield]: https://img.shields.io/github/commit-activity/t/DKundnani/rNMP_hotspots?style=for-the-badge
 [website-shield]: https://img.shields.io/website?url=http%3A%2F%2Fdkundnani.bio%2F&style=for-the-badge
 [website-url]:http://dkundnani.bio/ 
