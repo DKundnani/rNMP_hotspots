@@ -84,28 +84,32 @@ done < $lib > $normbed/norm.log
 ```
 ### Generating matrix
 ```bash
-mkdir $normbed/hotspots #place files into the hotspots folder
+mkdir $normbed/hotspots #place files into the normbed folder
 cd $normbed
+#getting files per genotype
+filelist=$(cut -f3 files | uniq | tr "\n" "\t")
+for f in $filelist; do grep $f files > ${f}_files; done 
+
 thresh=2 #Minimum 2 libraries in each subtype used as threshold
-for file in $(ls *files); do $script/df_matrix.R -f $file -a -t $thresh -c 8 -s -o ${file}_${thresh}_common_EF.tsv & done #files contain library information per genotype to be grouped for finding hotspots
+for f in $filelist; do $script/df_matrix.R -f ${f}_files -a -t $thresh -c 8 -s -o ${f}_files_${thresh}_common_EF.tsv & done #files contain library information per genotype to be grouped for finding hotspots
 ```
 ### Getting common hotspots for each genotype using different thresholds and visualization
 ```bash
 mv *tsv* ./hotspots/
 cd hotspots
 top=25 #Getting top 25 hotspots
-for file in $(ls BY*all); do Rscript $script/plot_hotspots.R -m $file -c -g $genome -r BSgenome.Scerevisiae.UCSC.sacCer2 -t $top -v -o . & done
+for f in $filelist; do Rscript $script/plot_hotspots.R -m ${f}_files*all -c -g $genome -r BSgenome.Scerevisiae.UCSC.sacCer2 -t $top -v -o . & done
 
 #Getting top fraction of hotspots
 for thresh in 0.05 0.02 0.01 ; do
-for file in $(ls BY*all); do Rscript $script/plot_hotspots.R -m $file -c -g $genome -r BSgenome.Scerevisiae.UCSC.sacCer2 -t $thresh -o . & done
+for f in $filelist; do Rscript $script/plot_hotspots.R -m ${f}_files*all -c -g $genome -r BSgenome.Scerevisiae.UCSC.sacCer2 -t $thresh -o . & done
 done
 
 ```
 ### GGseqlogo plots (MEME plots)
 ```bash
 for thresh in 0.05 0.02 0.01 ; do
-for file in $(ls BY*${thresh}*top*); do Rscript $script/meme.R -f $file -c 9 & done #ggseqlogo plots
+for f in $filelist; do Rscript $script/meme.R -f ${f}_files*${thresh}*top* -c 9 & done #ggseqlogo plots
 done
 ```
 ### Additional visualizations
