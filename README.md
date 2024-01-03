@@ -49,39 +49,64 @@ git clone https://github.com/DKundnani/rNMP_hotspots.git
 ```
 ### Creating the enviroment with required dependencies
 ```sh
-conda env create --name RibosemapQC_env --file /rNMP_hotspots/yml/r_env.yml
+conda env create --name rNMPhotspots_env --file /rNMP_hotspots/yml/r_env.yml
 ```
 ### Additional Dependencies
 * Reference genome files (.fa and .fai) of the organism being used(Also used to generate bed files)
+* BAM files (optional) from DNA-seq pipelines See [https://github.com/DKundnani/Omics-pipelines](https://github.com/DKundnani/Omics-pipelines)
 
 <!-- USAGE -->
-
 ## Usage
-="###Defining-variables
+###Defining-variables
 ```bash
-lib=path/to/AGS/ribo-DNA-order #First col FScode, 3rd col basename of bam files
+lib=path/to/AGS/ribo-DNA-order #First col Library name, 3rd col basename of bam files from DNA-se pipeline, 
 bed=path/to/AGS/bed
 dna=path/to/AGS/DNAseq/aligned
 normbed=path/to/AGS/norm_counts
 script=path/to/AGS/rNMP_hotspots
-genome=path/to/reference/sacCer2/sacCer2-nucl.fa.fai![image](https://github.com/DKundnani/rNMP_hotspots/assets/20824535/9cbc97dc-9292-47ad-805d-e52b633e7447)
+genome=path/to/reference/sacCer2/sacCer2-nucl.fa.fai #size file of the genome
 ```
 ### Normalization of bed files for coverage
 ```bash
+conda activate rNMPhotspots_env #activating enviroment
+mkdir $normbed #Creating output directory
+
+while read -r line;
+do
+   FS=$(echo $line | tr " " "\t" | cut -f1)
+   sam=$(echo $line| sed 's/\r$//' | awk '{print $3}') 
+Rscript $script/count_norm.R -r $bed/*.bed -c ${dna}/${sam}.cov -g $genome -o $normbed ;
+done < $lib > $normbed/norm.log
 
 ```
-### Getting-hotspots-using-threshold
+### Generating matrix
 ```bash
-
+mkdir $normbed/hotspots #place files into the hotspots folder
+cd $normbed
+thresh=2 #Minimum 2 libraries in each subtype used as threshold
+for file in $(ls *files); do $script/df_matrix.R -f $file -a -t $thresh -c 8 -s -o ${file}_${thresh}_common_EF.tsv & done #files contain library information per genotype to be grouped for finding hotspots
 ```
-### Getting-hotspots-using-threshold
+### Getting common hotspots for each genotype using different thresholds and visualization
 ```bash
+mv *tsv* ./hotspots/
+cd hotspots
+top=25 #Getting top 25 hotspots
+for file in $(ls BY*all); do Rscript $script/plot_hotspots.R -m $file -c -g $genome -r BSgenome.Scerevisiae.UCSC.sacCer2 -t $top -v -o . & done
+
+#Getting top fraction of hotspots
+for thresh in 0.05 0.02 0.01 ; do
+for file in $(ls BY*all); do Rscript $script/plot_hotspots.R -m $file -c -g $genome -r BSgenome.Scerevisiae.UCSC.sacCer2 -t $thresh -o . & done
+done
 
 ```
-### Getting-hotspots-using-threshold
+### GGseqlogo plots (MEME plots)
 ```bash
-
+for thresh in 0.05 0.02 0.01 ; do
+for file in $(ls BY*${thresh}*top*); do Rscript $script/meme.R -f $file -c 9 & done #ggseqlogo plots
+done
 ```
+### Stacked barplots for composition
+See stacked barplots for composition in [RPA-wrapper](https://github.com/DKundnani/RPA-wrapper)
 
 
 <!-- CONTRIBUTING -->
@@ -119,10 +144,10 @@ Deepali L. Kundnani - [deepali.kundnani@gmail.com](mailto::deepali.kundnani@gmai
 <!-- ACKNOWLEDGMENTS -->
 ## Citations
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!+
-* <b>Light-strand bias and enriched zones of embedded ribonucleotides are associated with DNA replication and transcription in the human-mitochondrial genome. </b>
+* <b> Light-strand bias and enriched zones of embedded ribonucleotides are associated with DNA replication and transcription in the human-mitochondrial genome. </b>
 Penghao Xu, Taehwan Yang, Deepali L Kundnani, Mo Sun, Stefania Marsili, Alli L Gombolay, Youngkyu Jeon, Gary Newnam, Sathya Balachander, Veronica Bazzani, Umberto Baccarani, Vivian S Park, Sijia Tao, Adriana Lori, Raymond F Schinazi, Baek Kim, Zachary F Pursell, Gianluca Tell, Carlo Vascotto, Francesca Storici
 <i>  Acids Research </i> 2023;, gkad1204, [https://doi.org/10.1093/nar/gkad1204](https://doi.org/10.1093/nar/gkad1204)
-* <b>Distinct features of ribonucleotides within genomic DNA in Aicardi-Goutières syndrome (AGS)-ortholog mutants of <i>Saccharomyces cerevisiae</i> </b>
+* <b> Distinct features of ribonucleotides within genomic DNA in Aicardi-Goutières syndrome (AGS)-ortholog mutants of <i>Saccharomyces cerevisiae</i> </b>
 Deepali L. Kundnani, Taehwan Yang, Alli L. Gombolay, Kuntal Mukherjee, Gary Newnam, Chance Meers, Zeel H. Mehta, Celine Mouawad, Francesca Storici
 bioRxiv 2023.10.02.560505; doi:[https://doi.org/10.1101/2023.10.02.560505]( https://doi.org/10.1101/2023.10.02.560505)
 * Kundnani, D. (2024). Ribose-Map-QC (1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.10455801](https://doi.org/10.5281/zenodo.10455801) [![DOI](https://zenodo.org/badge/382943161.svg)](https://zenodo.org/doi/10.5281/zenodo.10453008)
