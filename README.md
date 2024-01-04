@@ -73,6 +73,7 @@ genome=path/to/reference/sacCer2/sacCer2-nucl.fa.fai #size file of the genome
 ```bash
 conda activate rNMPhotspots_env #activating enviroment
 mkdir $normbed #Creating output directory
+for sample in $(seq 1 6 | xargs -I aa echo Yaa); do samtools depth -a ${sample}.bam > ${sample}.cov & done #Get coverage file from bam files
 
 while read -r line;
 do
