@@ -66,7 +66,7 @@ lib=path/to/AGS/ribo-DNA-order #First col Library name, 3rd col basename of bam 
 bed=path/to/AGS/bed
 dna=path/to/AGS/DNAseq/aligned
 normbed=path/to/AGS/norm_counts
-script=path/to/AGS/rNMP_hotspots
+script=path/to/AGS/rNMP_hotspots/scripts
 genome=path/to/reference/sacCer2/sacCer2-nucl.fa.fai #size file of the genome
 ```
 ### Normalization of bed files for coverage (optional)
