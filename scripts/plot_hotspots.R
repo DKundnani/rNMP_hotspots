@@ -1,4 +1,5 @@
 #!/usr/bin/env Rscript
+
 args = commandArgs(trailingOnly=FALSE)
 file.arg.name <- "--file="
 script.name <- sub(file.arg.name, "", args[grep(file.arg.name, args)])
